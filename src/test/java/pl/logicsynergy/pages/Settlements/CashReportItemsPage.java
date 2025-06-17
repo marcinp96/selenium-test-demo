@@ -25,12 +25,13 @@ public class CashReportItemsPage {
     private WebElement popupConfirmButton;
 
     private WebDriver driver;
-
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
 
     public CashReportItemsPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public CashReportItemsPage creatingNewCashRaport() throws InterruptedException {

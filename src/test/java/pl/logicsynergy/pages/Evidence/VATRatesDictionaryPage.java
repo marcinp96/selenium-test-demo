@@ -27,12 +27,13 @@ public class VATRatesDictionaryPage {
     private WebElement saveRecordButton;
 
     private WebDriver driver;
-
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
 
     public VATRatesDictionaryPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // <- tu driver jest już nie-null
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public VATRatesDictionaryPage addNewVATRate() throws InterruptedException {

@@ -29,12 +29,13 @@ public class DictionaryOfCashlessPaymentTypesPage {
     private WebElement closeWindowButton;
 
     private WebDriver driver;
-
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
 
     public DictionaryOfCashlessPaymentTypesPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public DictionaryOfCashlessPaymentTypesPage addNewCashlessPaymentType() throws InterruptedException {

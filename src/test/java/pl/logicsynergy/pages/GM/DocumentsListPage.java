@@ -64,10 +64,13 @@ public class DocumentsListPage {
     private WebElement popupNoButton;
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public DocumentsListPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));  // <- tu driver jest już nie-null
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public DocumentsListPage addNewDocument(String storageName, String documentType, String customerId, String account5, String index, String price) throws InterruptedException {

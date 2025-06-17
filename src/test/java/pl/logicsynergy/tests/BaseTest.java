@@ -17,18 +17,23 @@ public class BaseTest {
 
     @BeforeMethod
     public void setup() {
-        boolean headless = false;
+        // Odczytujemy parametr systemowy: -Dheadless=true
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
         driver = DriverFactory.getDriver(headless);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         logger.info("Załadowano ustawienia przeglądarki");
+
         driver.get("http://172.18.93.93:8100/eMediaZadania1/ui");
         logger.info("Załadowano stronę logowania");
     }
 
     @AfterMethod
     public void tearDown() {
-        driver.quit();
-        logger.info("Zamknięto przeglądarkę");
+        if (driver != null) {
+            driver.quit();
+            logger.info("Zamknięto przeglądarkę");
+        }
     }
 }

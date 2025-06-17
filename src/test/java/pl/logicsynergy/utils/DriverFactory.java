@@ -5,16 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-/*public class DriverFactory {
-
-    public static WebDriver getDriver() {
-        WebDriverManager.chromedriver().setup();
-
-        return new ChromeDriver();
-    }
-}*/
-
 public class DriverFactory {
+
     private static WebDriver driver;
 
     public static WebDriver getDriver(boolean headless) {
@@ -26,6 +18,11 @@ public class DriverFactory {
                 options.addArguments("--headless=new");
                 options.addArguments("--window-size=1920,1080");
             }
+
+            // Można też dodać inne opcje, np. wyłączenie infobarów itp.
+            options.addArguments("--disable-gpu");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
 
             driver = new ChromeDriver(options);
         }

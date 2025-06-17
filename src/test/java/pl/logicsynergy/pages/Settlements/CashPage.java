@@ -61,14 +61,14 @@ public class CashPage {
     @FindBy(xpath = ".//td")
     private List<WebElement> columns;  // Lista kolumn w wierszu
 
-
     private WebDriver driver;
-
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
 
     public CashPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public CashReportItemsPage doubleClickOnCashReportRecord() throws InterruptedException {

@@ -68,12 +68,12 @@ public class HomePage {
     private WebElement gmAccountingNote;
 
     private WebDriver driver;
-
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    private WebDriverWait wait;
 
     public HomePage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
         System.out.println(driver);
     }
 

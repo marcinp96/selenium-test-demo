@@ -16,10 +16,13 @@ import java.util.stream.Collectors;
 public class DocumentsPage {
 
     private WebDriver driver;
+    private WebDriverWait wait;
 
     public DocumentsPage(WebDriver driver) {
-        PageFactory.initElements(driver, this);
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        PageFactory.initElements(driver, this);
+        System.out.println(driver);
     }
 
     public void selectOverduePayments() throws InterruptedException {
