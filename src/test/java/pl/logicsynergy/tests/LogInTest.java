@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pl.logicsynergy.models.User;
-import pl.logicsynergy.pages.HomePage;
 import pl.logicsynergy.pages.LogInPage;
 
 public class LogInTest extends BaseTest {
@@ -20,9 +19,4 @@ public class LogInTest extends BaseTest {
 
         Assert.assertEquals(usernameLabel.getText(), user.getLogin());
     }
-
-/*    @Test
-    public void logInWithInvalidData() {
-
-    }*/
 }
