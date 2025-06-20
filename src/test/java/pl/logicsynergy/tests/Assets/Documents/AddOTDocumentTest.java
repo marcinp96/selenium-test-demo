@@ -14,12 +14,18 @@ public class AddOTDocumentTest extends BaseTest {
 
     @Test
     public void addOTDocumentTest() throws InterruptedException {
-        WebElement OTDocumentType = new LogInPage(driver)
-                .logInValidData(user.getLogin(), user.getPassword())
-                .openAssetsModule()
-                .openAssetsDocumentTypes()
-                .addNewDocumentType();
+        try {
+            WebElement OTDocumentType = new LogInPage(driver)
+                    .logInValidData(user.getLogin(), user.getPassword())
+                    .openAssetsModule()
+                    .openAssetsDocumentTypes()
+                    .addNewDocumentType();
 
-        Assert.assertEquals(OTDocumentType.getText(), "Przyjęcie Środka Trwałego", "Brak rekordu w gridzie o nazwie: Przyjęcie Środka Trwałego");
+            Assert.assertEquals(OTDocumentType.getText(), "Przyjęcie Środka Trwałego", "Brak rekordu w gridzie o nazwie: Przyjęcie Środka Trwałego");
+        } catch (Exception e) {
+            takeScreenshot("addOTDocumentTest_error");  // zrób screenshot przy błędzie
+            throw e;  // rzuć dalej wyjątek, żeby test był oznaczony jako failed
+        }
     }
+
 }

@@ -1,5 +1,6 @@
 package pl.logicsynergy.pages.Assets;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,7 +33,7 @@ public class DocumentTypesPage {
     private WebElement finalStatusInput;
 
     @FindBy(id = "gtbSave")
-    private WebElement saveRecordButton;
+    private WebElement saveButton;
 
     @FindBy(xpath = "(//*[@id='grid']/div[3]/table/tbody/tr)[last()]/td[2]")
     private WebElement cellToAssert;
@@ -48,27 +49,47 @@ public class DocumentTypesPage {
     }
 
     public WebElement addNewDocumentType() throws InterruptedException {
+        // Pomocnicza metoda do scrollowania:
+        scrollToElement(addNewRecordButton);
+        wait.until(ExpectedConditions.elementToBeClickable(addNewRecordButton));
+        addNewRecordButton.click();
+
+        scrollToElement(symbolInput);
+        wait.until(ExpectedConditions.visibilityOf(symbolInput));
+        symbolInput.sendKeys("OT");
+
+        scrollToElement(nameInput);
+        wait.until(ExpectedConditions.visibilityOf(nameInput));
+        nameInput.sendKeys("Przyjęcie Środka Trwałego");
+
+        scrollToElement(documentTypeInput);
+        wait.until(ExpectedConditions.visibilityOf(documentTypeInput));
+        documentTypeInput.sendKeys("OT");
         Thread.sleep(200);
-        wait.until(ExpectedConditions.elementToBeClickable(addNewRecordButton)).click();
-        Thread.sleep(200);
-        wait.until(ExpectedConditions.visibilityOf(symbolInput)).sendKeys("OT");
-        Thread.sleep(200);
-        wait.until(ExpectedConditions.visibilityOf(nameInput)).sendKeys("Przyjęcie Środka Trwałego");
-        Thread.sleep(200);
-        wait.until(ExpectedConditions.visibilityOf(documentTypeInput)).sendKeys("OT");
-        Thread.sleep(500);
         documentTypeInput.sendKeys(Keys.ENTER);
-        wait.until(ExpectedConditions.visibilityOf(operationTypeInput)).sendKeys("N - Wprowadzenie nowego ST");
-        Thread.sleep(500);
+
+        scrollToElement(operationTypeInput);
+        wait.until(ExpectedConditions.visibilityOf(operationTypeInput));
+        operationTypeInput.sendKeys("N - Wprowadzenie nowego ST");
+        Thread.sleep(200);
         operationTypeInput.sendKeys(Keys.ENTER);
+
+        scrollToElement(finalStatusInput);
+        wait.until(ExpectedConditions.visibilityOf(finalStatusInput));
+        finalStatusInput.sendKeys("C - Czynny");
         Thread.sleep(200);
-        wait.until(ExpectedConditions.visibilityOf(finalStatusInput)).sendKeys("C - Czynny");
-        Thread.sleep(500);
         finalStatusInput.sendKeys(Keys.ENTER);
-        Thread.sleep(200);
-        wait.until(ExpectedConditions.elementToBeClickable(saveRecordButton)).click();
+
+        scrollToElement(saveButton);
+        wait.until(ExpectedConditions.elementToBeClickable(saveButton));
+        saveButton.click();
 
         wait.until(ExpectedConditions.visibilityOf(cellToAssert)); // Oczekiwanie na widoczność
         return cellToAssert;
+    }
+
+    // Metoda scrollująca:
+    private void scrollToElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 }
